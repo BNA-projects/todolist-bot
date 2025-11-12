@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
+    "dev": "tsx watch index.ts",
     "build": "tsup src/index.ts --format esm,cjs --dts --sourcemap",
     "start": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
