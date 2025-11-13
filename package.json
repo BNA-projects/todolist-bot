@@ -2,12 +2,12 @@
   "name": "todolist-bot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "type": "module",
   "scripts": {
     "dev": "tsx watch index.ts",
-    "build": "tsup src/index.ts --format esm,cjs --dts --sourcemap",
-    "start": "node dist/index.js",
+    "build": "tsup index.ts --format esm,cjs --dts --sourcemap",
+    "start": "node dist/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
