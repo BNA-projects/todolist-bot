@@ -1,11 +1,10 @@
 {
   "compilerOptions": {
-    // Output folders
     "outDir": "./dist",
     "rootDir": "./",
 
-    // Language & module settings
     "target": "ES2022",
+
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "esModuleInterop": true,
@@ -13,11 +12,9 @@
     "skipLibCheck": true,
     "types": ["node"],
 
-    // Source maps and declarations
     "sourceMap": true,
     "declaration": true,
 
-    // Disable JSX (not needed for bot)
     "jsx": "preserve"
   },
   "include": ["src", "index.ts"]
