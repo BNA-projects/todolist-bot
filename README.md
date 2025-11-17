@@ -17,10 +17,12 @@ The system automatically saves all data to PostgreSQL (Supabase),
 and the web interface presents tasks clearly and neatly.
 
 Architecture:
+
 ![alt text](/public/image.png)
 
 
 ⚙️ Tech Stack
+
 🖥️ Frontend
 Next.js / React
 Supabase client
@@ -55,3 +57,4 @@ To create an intuitive task management tool that users can interact with
 directly from Telegram, without switching apps.
 Write or speak your tasks — and the system automatically saves, structures,
 and displays everything on the website.
+
