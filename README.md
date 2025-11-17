@@ -27,15 +27,18 @@ Architecture:
 Next.js / React
 Supabase client
 Server Components / SPA (depending on implementation)
+
 🗄️ Backend / Database
 Supabase
 PostgreSQL
 REST API
 RLS Policies
+
 🤖 Telegram Bot
 grammY (Telegram Bot API)
 Webhook handling
 Supabase SDK integration
+
 🎤 Voice Input
 AssemblyAI
 Speech-to-text conversion
@@ -57,4 +60,5 @@ To create an intuitive task management tool that users can interact with
 directly from Telegram, without switching apps.
 Write or speak your tasks — and the system automatically saves, structures,
 and displays everything on the website.
+
 
