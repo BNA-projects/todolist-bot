@@ -26,11 +26,12 @@ export function registerWeekdayCallbacks(bot: Bot) {
     await updateTaskWeekday(userId, weekday);
 
     await ctx.answerCallbackQuery();
-
     if (ctx.callbackQuery?.message) {
-      await ctx.editMessageText(`Weekday selected: ${weekday.toUpperCase()}`);
+      await ctx.api.deleteMessage(
+        ctx.chat!.id,
+        ctx.callbackQuery.message.message_id
+      );
     }
-
     await askForTopic(ctx);
   });
 }
