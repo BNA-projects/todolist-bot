@@ -1,7 +1,10 @@
 import { Bot, InlineKeyboard } from "grammy";
 import { startHandler } from "./handlers/startHandler";
-import { askForTopic } from "./handlers/topicHandler";
-import { askForWeekday, registerWeekdayCallbacks } from "./handlers/weekdayHandler";
+
+import {
+  askForWeekday,
+  registerWeekdayCallbacks,
+} from "./handlers/weekdayHandler";
 
 import {
   saveTaskToDb,
