@@ -1,6 +1,8 @@
 import { Bot, InlineKeyboard } from "grammy";
 import { startHandler } from "./handlers/startHandler";
 import { askForTopic } from "./handlers/topicHandler";
+import { askForWeekday, registerWeekdayCallbacks } from "./handlers/weekdayHandler";
+
 import {
   saveTaskToDb,
   updateTaskTopic,
@@ -14,10 +16,14 @@ import { env } from "../config/env";
 export function registerBotHandlers(bot: Bot) {
   bot.command("start", startHandler);
 
+  // ✅ Регистрируем обработчики day_*
+  registerWeekdayCallbacks(bot);
+
+  // ✅ CONFIRM: теперь показываем только дни недели
   bot.callbackQuery("correct", async (ctx) => {
     await ctx.answerCallbackQuery();
     await ctx.editMessageText("✅ Confirmed!");
-    await askForTopic(ctx);
+    await askForWeekday(ctx);
   });
 
   bot.callbackQuery("change", async (ctx) => {
@@ -41,6 +47,7 @@ export function registerBotHandlers(bot: Bot) {
     await ctx.editMessageText("🗑 Task deleted.");
   });
 
+  // topic callbacks (остаются как есть)
   bot.callbackQuery(/topic_(.+)/, async (ctx) => {
     const match = ctx.match;
     const topic =
@@ -50,6 +57,7 @@ export function registerBotHandlers(bot: Bot) {
     if (!userId) return;
 
     await updateTaskTopic(userId, topic);
+
     await ctx.answerCallbackQuery();
     await ctx.editMessageText(`✅ Your task has been saved successfully`);
   });
@@ -64,14 +72,18 @@ export function registerBotHandlers(bot: Bot) {
 
     const lastTask = await getLastTask(userId);
 
+    // если это ответ на сообщение "send corrected version..."
     if (lastTask && ctx.message.reply_to_message) {
       await updateTaskText(userId, text);
 
       await ctx.reply(`✅ Updated task:\n"${text}"`);
-      await askForTopic(ctx);
+
+      // ✅ после изменения текста тоже спрашиваем день недели
+      await askForWeekday(ctx);
       return;
     }
 
+    // новый таск
     await saveTaskToDb(userId, text);
 
     const kb = new InlineKeyboard()

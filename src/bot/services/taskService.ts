@@ -10,6 +10,7 @@ export interface Task {
   updated_at: string;
   date: string | null;
   topic: string;
+  weekday: string | null;
 }
 
 export async function saveTaskToDb(userId: number, text: string) {
@@ -81,3 +82,24 @@ export async function updateTaskText(userId: number, newText: string) {
     console.log(`✅ Task text updated for userId ${userId}`);
   }
 }
+
+export async function updateTaskWeekday(userId: number, weekday: string) {
+  const lastTask = await getLastTask(userId);
+
+  if (!lastTask) {
+    console.warn("⚠️ No task found to update weekday.");
+    return;
+  }
+
+  const { error } = await supabase
+    .from("tasks")
+    .update({ weekday })
+    .eq("id", lastTask.id);
+
+  if (error) {
+    console.error("❌ Error updating weekday:", error.message);
+  } else {
+    console.log(`✅ Task weekday updated to (${weekday}) for userId ${userId}`);
+  }
+}
+
