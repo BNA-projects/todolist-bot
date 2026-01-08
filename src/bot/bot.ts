@@ -19,13 +19,9 @@ import { env } from "../config/env";
 export function registerBotHandlers(bot: Bot) {
   bot.command("start", startHandler);
 
-  // ✅ Регистрируем обработчики day_*
   registerWeekdayCallbacks(bot);
-
-  // ✅ CONFIRM: теперь показываем только дни недели
   bot.callbackQuery("correct", async (ctx) => {
     await ctx.answerCallbackQuery();
-    await ctx.editMessageText("✅ Confirmed!");
     await askForWeekday(ctx);
   });
 
