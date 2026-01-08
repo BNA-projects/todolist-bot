@@ -12,7 +12,9 @@ const envSchema = z.object({
 
   TELEGRAM_BOT_TOKEN: z.string().min(10, "TELEGRAM_BOT_TOKEN is required"),
 
-  ASSEMBLY_API_KEY: z.string().min(10, "ASSEMBLYAI_API_KEY is required"),
+  ASSEMBLY_API_KEY: z.string().min(10, "ASSEMBLY_API_KEY is required"),
+
+//   PUBLIC_URL: z.string().url("PUBLIC_URL must be a valid URL").optional(),
 });
 
 const parsed = envSchema.safeParse(process.env);
